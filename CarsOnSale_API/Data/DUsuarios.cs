@@ -15,7 +15,7 @@ namespace CarsOnSale_API.Data
 
             using (var sql = new SqlConnection(cn.CadenaSQL()))
             {
-                using(var cmd = new SqlCommand("SP_ListaUsuarios", sql))
+                using(var cmd = new SqlCommand("getAllUsers", sql))
                 {
                     await sql.OpenAsync();
 
@@ -27,13 +27,13 @@ namespace CarsOnSale_API.Data
                         {
                             var usuarios = new MUsuarios();
 
-                            usuarios.Id = (int)item["Id"];
-                            usuarios.NombreDeUsuario = (string)item["NombreDeUsuario"];
-                            usuarios.Nombre = (string)item["Nombre"];
-                            usuarios.Apellido = (string)item["Apellido"];
+                            usuarios.ID = (int)item["ID"];
+                            usuarios.nombres = (string)item["nombres"];
+                            usuarios.apellidos = (string)item["apellidos"];
                             usuarios.clave = (string)item["clave"];
-                            usuarios.Correo = (string)item["Correo"];
-                            usuarios.Telefono = (string)item["Telefono"];
+                            usuarios.direccion = (string)item["direccion"];
+                            usuarios.ID_Provincia = (int)item["ID_Provincia"];
+                            usuarios.telefono = (string)item["telefono"];
                             
                             list.Add(usuarios);
                         }
@@ -48,15 +48,15 @@ namespace CarsOnSale_API.Data
         {
             using (var sql = new SqlConnection(cn.CadenaSQL()))
             {
-                using(var cmd = new SqlCommand("SP_registrar", sql))
+                using(var cmd = new SqlCommand("addUser", sql))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@NombreDeUsuario", parametros.NombreDeUsuario);
+                    cmd.Parameters.AddWithValue("@name", parametros.nombres);
+                    cmd.Parameters.AddWithValue("@lastname", parametros.apellidos);
                     cmd.Parameters.AddWithValue("@clave", parametros.clave);
-                    cmd.Parameters.AddWithValue("@Nombre", parametros.Nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", parametros.Apellido);
-                    cmd.Parameters.AddWithValue("@Correo", parametros.Correo);
-                    cmd.Parameters.AddWithValue("@Telefono", parametros.Telefono);
+                    cmd.Parameters.AddWithValue("@addres", parametros.direccion);
+                    cmd.Parameters.AddWithValue("@provincia", parametros.ID_Provincia);
+                    cmd.Parameters.AddWithValue("@tel", parametros.telefono);
 
                     await sql.OpenAsync();
                     await cmd.ExecuteReaderAsync();
@@ -68,16 +68,16 @@ namespace CarsOnSale_API.Data
         {
             using (var sql = new SqlConnection(cn.CadenaSQL()))
             {
-                using (var cmd = new SqlCommand("SP_modificarUsuario", sql))
+                using (var cmd = new SqlCommand("upUser", sql))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", parametros.Id);
-                    cmd.Parameters.AddWithValue("@NombreDeUsuario", parametros.NombreDeUsuario);
+                    cmd.Parameters.AddWithValue("@id", parametros.ID);
+                    cmd.Parameters.AddWithValue("@name", parametros.nombres);
+                    cmd.Parameters.AddWithValue("@lastname", parametros.apellidos);
                     cmd.Parameters.AddWithValue("@clave", parametros.clave);
-                    cmd.Parameters.AddWithValue("@Nombre", parametros.Nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", parametros.Apellido);
-                    cmd.Parameters.AddWithValue("@Correo", parametros.Correo);
-                    cmd.Parameters.AddWithValue("@Telefono", parametros.Telefono);
+                    cmd.Parameters.AddWithValue("@addres", parametros.direccion);
+                    cmd.Parameters.AddWithValue("@provincia", parametros.ID_Provincia);
+                    cmd.Parameters.AddWithValue("@tel", parametros.telefono);
 
                     await sql.OpenAsync();
                     await cmd.ExecuteReaderAsync();
@@ -89,10 +89,10 @@ namespace CarsOnSale_API.Data
         {
             using (var sql = new SqlConnection(cn.CadenaSQL()))
             {
-                using (var cmd = new SqlCommand("[SP_eliminarRegistro]", sql))
+                using (var cmd = new SqlCommand("[delUser]", sql))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", parametros.Id);
+                    cmd.Parameters.AddWithValue("@id", parametros.ID);
 
                     await sql.OpenAsync();
                     await cmd.ExecuteReaderAsync();

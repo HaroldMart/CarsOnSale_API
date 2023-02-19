@@ -1,0 +1,22 @@
+﻿Este es la documentacion basica de la API.
+
+Recuerda: (en especial kritiam) que estos metodos lo unico que hacen es llamar a los store procedures de la BD, osea que asi como 
+hay algunos que reciben parametros (ejemplo el ID) tambien tienes que pasarselos al metodo para que se pueda ejecutar correctamente...
+
+Si quieres probas los metodos basicos de un CRUD puedes hacer lo siguiente:
+
+Get: este te traera todos los usuarios registrados en la base de datos hasta el momento, en la direccion del link en el navegador,
+o postman tienes que poner la direccion /api/usuarios despues de los la direccion original de la BD, ejemplo: 
+https://localhost:7121/api/usuarios
+
+Post: este recibe todos los parametros menos el id obviamente, y una vez son enviados en una plataforma como postman (ejemplo), entonces
+estos datos son insertados en la base de datos.
+
+Put: al igual que su respectivo store procedure, recibe todos los datos por parametro (menos el id porque ese no se actualiza) y 
+una vez pasas todos los parametros, cambias el campo que quieres actualizar y este se actualiza automaticamente, SE SUPONE XD.
+
+Delete: respecto al store procedure de turno, este solamente RECIBE el id como parametro para poder eliminar el registro especificado.
+
+Nota: ------los datos por parametro (especificamente el id) del Put y el delete deben ser puestos en la 
+direccion de la barra del navegador o postman. Ejemplo: 
+https://localhost:7121/api/usuarios/7 elimina el usuario con id 7

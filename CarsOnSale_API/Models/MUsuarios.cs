@@ -4,19 +4,19 @@ namespace CarsOnSale_API.Models
 {
     public class MUsuarios
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        public string NombreDeUsuario { get; set; }
+        public string nombres { get; set; }
+
+        public string apellidos { get; set; }
 
         public string clave { get; set; }
 
-        public string Nombre { get; set;}
+        public string direccion { get; set; }
 
-        public string Apellido { get; set; }
+        public int ID_Provincia { get; set; }
 
-        public string Correo { get; set; }
-
-        public string Telefono { get; set; }
+        public string telefono { get; set; }
 
     }
 }
